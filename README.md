@@ -59,23 +59,23 @@ We also then wanted to look at each region individually. We created dataframes f
 
 North America:
 
-![](../visuals/heatmap_NA.png)
+![](./visuals/heatmap_NA.png)
 
 Sub-Saharan Africa:
 
-![](../visuals/heatmap_SSA.png)
+![](./visuals/heatmap_SSA.png)
 
 Southeast Asia:
 
-![](../visuals/heatmap_SeA.png)
+![](./visuals/heatmap_SeA.png)
 
 We lastly wanted to check the principle component scores for the different features to see which ones had the highest explained variance within the model. We found that the first principle component could account for roughly 50% of the explained variance:
 
-![](../visuals/cummulative_explained_difference.png)
+![](./visuals/cummulative_explained_difference.png)
 
 It also appeared that deaths from unsafe water and crude birthrate had the most influence on the first principle component:
 
-![](../visuals/primary_component_map.png)
+![](./visuals/primary_component_map.png)
 
 After completing the EDA, it was time to start building the models.
 
