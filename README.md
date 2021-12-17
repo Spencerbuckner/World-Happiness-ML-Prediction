@@ -1,180 +1,178 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 5: Group Project ASDF
+# WORLD HAPPINESS REPORT
 
-## The work
+## Problem Statement:
 
-For this project, you will be doing work that focuses on social impact.
+We have been hired by the UN to build a model that can predict the happiness of an average person in each country based on scores for 8 categories provided by the UN and an additional 4 factors that we added. Secondly, can we predict what region of the world this average person is from, based on the scores from the features.
 
-The prompts are there to help jump-start your ideation process. If you would like to change or combine prompts, that's fine! If you want to find your own idea, even better. **Consult your local instructor for final approval before getting started.**  
+## Data Gathering
 
-Remember to start with a good problem statement!
+Data was collected from the UN Happiness Report for the years 2015-2017 [Happiness Report](https://www.kaggle.com/unsdsn/world-happiness)
+Data was also gathered from [Our World in Data](https://ourworldindata.org/)
 
-## The Data
+## Data Dictionary
 
-Some prompts have links to data sources, some don't. It's your responsibility to gather and clean your data. For most projects, this will be the bulk of your work.Start early!
+|Feature|Type|Description|
+|---|---|---|
+|**country**|*object*|Name of the country.|
+|**region**|*object*|Region the country belongs to.|
+|**year**|*int*|Year of the report.|
+|**happiness_score**|*float*|A metric measured by asking the sampled people the question: "How would you rate your happiness on a scale of 1-10"|
+|**economy_(gdp_per_capita)**|*float*|The extent to which GDP contributes to the calculation of the Happiness Score.|
+|**family**|*float*|The extent to which Family contributes to the calculation of the Happiness Score.|
+|**health_(life_expectancy)**|*float*|The extent to which Life expectancy contributed to the calculation of the Happiness Score.|
+|**freedom**|*float*|The extent to which Freedom contributed to the calculation of the Happiness Score.|
+|**trust_(government_corruption)**|*float*|The extent to which Perception of Corruption contributes to Happiness Score.|
+|**generosity**|*float*|The extent to which Generosity contributed to the calculation of the Happiness Score.|
+|**dystopia_residual**|*float*|Dystopia is the worst possible country based on the lowest score for each category. The residual is the difference between a specific countries score and the dystopia score. Example: A residual of 0 would reflect being equal to the worst country.|
+|**food_supply_(kcal/capita/day)**|*float*|The number of calories available per capita per day for each country.|
+|**crude_birth_rate_(births_per_1,000_population)**|*float*|Birth rate per 1,000 people in each country.|
+|**deaths_unsafe_water_source_per_100k_people**|*float*|Deaths due to unsafe drinking water per 100,000 people in each country.|
+|**deaths_conflict_and_terrorism**|*float*|Total deaths from conflict terrorism a country occured within each country.|
 
-Inspiration for several prompts came from [Data is Plural](https://tinyletter.com/data-is-plural).
 
-## Prompts
+## Data Cleaning
 
-### Aviation Accidents
+- The UN data was clean, nothing needed to be changed.
+- For the data from Our World in Data, there were a few NaN values, for which we imputed the mean value for the region that the country was located in.
 
-The National Transportation Safety Board (NTSB) [tracks](https://www.ntsb.gov/_layouts/ntsb.aviation/index.aspx) all civilian aviation accidents (and "incidents") going back to 1962.
+## EDA
 
-### Center for Disease Control
+The first thing that we explored was the relationship between happiness, food, and freedom. Using Tableau, we created a visualization to help show how these features relate to each other. [Tableau](https://public.tableau.com/app/profile/spencer.buckner/viz/HappinessData_16396021350410/Dash1) 
 
-The Center for Disease Control has several datasets:
-- [Vaccinations](https://data.cdc.gov/browse?category=Vaccinations)
-- [Smoking and Tobacco Use](https://data.cdc.gov/browse?category=Smoking+%26+Tobacco+Use)
-- [COVID-19](https://data.cdc.gov/browse?tags=covid-19)
+Secondly, we created a heatmap that displays the correlation between happiness and all other features. Then, we created a table to show the average happiness score by region, countries, and also by the year. 
 
-### Economic Data
+![](./visuals/avg_happiness_by_region.png)
 
-If you're interested in a project focused on the economy, the Bureau of Labor Statistics (BLS) has [several datasets](https://www.bls.gov/data/) ranging from employment to inflation.
+We checked the top 10 average scores by country: 
 
-### Voter Fraud (or lack thereof)
-The Brookings Institute had an [interesting article](https://www.brookings.edu/blog/fixgov/2020/06/02/low-rates-of-fraud-in-vote-by-mail-states-show-the-benefits-outweigh-the-risks/) on voter fraud. Although no datasets are provided, there are several links to sources where you might be able to find some.
+![](./visuals/top_10_by_country.png)
 
-### Incarceration
+We checked the bottom 10 scores by country:
 
-The United States Sentencing Commission (USSC) has [data](https://www.ussc.gov/research/datafiles/commission-datafiles) on federal sentencing going back to 2002.
+![](./visuals/bottom_10_by_country.png)
 
-### Environment
+Next, we wanted to look at the relationship between the economy of a country and the happiness score: 
 
-The EPA has data on [air quality](https://cfpub.epa.gov/airnow/index.cfm?action=airnow.main), [precipitation](https://edg.epa.gov/metadata/catalog/search/resource/details.page?uuid={BDD5DD12-4942-41A6-B47D-9C2459F28A0A}), [stream flows](https://edg.epa.gov/metadata/catalog/search/resource/details.page?uuid={0599E344-4682-479D-9334-78FE576E2881}) [and more](https://edg.epa.gov/metadata/catalog/main/home.page).
+![](./visuals/birth_rate_vs_happiness.png)
 
-### Protests
+We also then wanted to look at each region individually. We created dataframes for each region and then created heatmaps for each one. The heatmaps showed that each region had different correlations between the different features and the happiness score, which makes intuitive sense, assuming that people in different regions of the world view happiness differently. There were three regions that show these distinctions most clearly:
 
-[The Mass Mobilization Project](https://massmobilization.github.io/) provides data on demonstrations worldwide, as well as the government responses.
+North America:
 
-### Charity
+![](../visuals/heatmap_NA.png)
 
-[Data.world](https://data.world/datasets/charity) has several datasets related to altruism: donations, organizations, and volunteerism. 
+Sub-Saharan Africa:
 
-### CTE
+![](../visuals/heatmap_SSA.png)
 
-Chronic Traumatic Encephalopathy (CTE) is a horrific brain disease, and occurs [frequently](http://www.bu.edu/articles/2017/cte-former-nfl-players/) in former NFL players. Gathering the data will take some work, but here are some starter links.
-- [Kaggle](https://www.kaggle.com/jpmiller/nfl-competition-data)
-- [Twelve Years of National Football League Concussion Data](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3438866/)
+Southeast Asia:
 
-### Politics
-FiveThiryEight is a great news and commentary site for all things data. Their main foci are sports and politics. If you're interested in polling data, check out the "Data" links in the footer on [this page](https://projects.fivethirtyeight.com/2020-election-forecast/).
+![](../visuals/heatmap_SeA.png)
 
-### Consumer Complaints
+We lastly wanted to check the principle component scores for the different features to see which ones had the highest explained variance within the model. We found that the first principle component could account for roughly 50% of the explained variance:
 
-The Consumer Financial Protection Bureau maintains a [dataset](https://www.consumerfinance.gov/data-research/consumer-complaints/) on customer complaints to various financial organizations in the US.
+![](../visuals/cummulative_explained_difference.png)
 
-### Professional Athletes
+It also appeared that deaths from unsafe water and crude birthrate had the most influence on the first principle component:
 
-For this prompt, choose a professional sport and compare the distribution of birth months vs the US population. [Sports Reference](https://www.sports-reference.com/) is a good resource for men's and women's sports.
+![](../visuals/primary_component_map.png)
 
-h/t [Malcolm Gladwell](https://youtu.be/kspphGOjApk?t=148)
+After completing the EDA, it was time to start building the models.
 
-### SEC
+## Models
 
-The Securities and Exchange Commission (SEC) is the go-to for [financial data](https://www.sec.gov/edgar/searchedgar/companysearch.html) on US publicly traded companies. The also have [press releases](https://www.sec.gov/litigation/litreleases.shtml) that pertain to various violations.
+For this project we chose to do two separate paths of model creation. The first path was to use different regressors in order to predict the happiness score based on 13 of the features. The second path was to do multi-classifier models to predict the region. 
 
-### US Treasury
+![](./visuals/model%20paths.PNG)
 
-The US Treasury Department has several datasets related to public debt. The [yield curve](https://www.treasury.gov/resource-center/data-chart-center/interest-rates/pages/textview.aspx?data=yield) is a key indicator of economic health. They also maintain data on the sale of [securities](https://www.treasurydirect.gov/instit/annceresult/annceresult.htm).
 
-They also have [auction data](https://home.treasury.gov/services/treasury-auctions) for items that are seized by the IRS.
+### Linear Regression
 
-### Federal Reserve
+#### Multivariate Regression Model (MLR)
 
-The Fed has a wide variety of [datasets](https://www.federalreserve.gov/datadownload/) related to the economy and financial markets.
+The first model that we explored was a Multivariate Regression Model. In finding what features we wanted to select, we thought that using 2 feature engineered features could provide some insight into our model.
 
-### Still stuck?
+For our first feature, we multiplied the economy_(gdp_per_capita) by food_supply_(kcal/capita/day) for each respective country. Our second feature was created by multiplying the health_(life_expectancy) by family score for each respective country as well. Once we had our new features, we ran a Linear Regression and produced the following model:
 
-Check out [/r/dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/), [Data.world](https://data.world/) and [Kaggle](https://www.kaggle.com/datasets) for inspiration.
+![](./visuals/3D%20Lin%20Reg%20Model.gif)
 
-## Requirements
-For the purposes of a DSI project, you must meet a few technical requirements. They are:
-1)  A `README.md` file in your project repo. Note that `README` files are automatically rendered by GitHub when you view a repo. Your README should contain:
-    - A problem statement.
-    - A succinct formulation of the question your analysis seeks to answer.
-    - A table of contents, which should indicate which notebook or scripts a stakeholder should start with, and a link to an **executive summary**.
-    - A paragraph description of the data you used, plus your data acquisition, ingestion, and cleaning steps.
-    - A short description of software requirements (e.g., `Pandas`, `Scikit-learn`) required by your analysis.
+Our model produced an R2 score of ~ 0.72. Not exactly amazing, but a good starting point for our regression models.
 
-2) Your notebook(s) should be **reproducible** and **error-free**. This means:
-    - You should set a random seed at the start of every notebook. This will ensure that the random numbers generated in your notebook will be the same every time.
-    - You need to provide a _relative path_ to your data, so that if I clone your repo to my machine I can run everything in your repo without error. (You also provide links to any publicly accessible data.)
-    - I should be able to `Restart & Run All` in your notebook(s) and see that the _exact same_ results are reproduced.
-    - To check that everything worked properly, you may consider forking your own repo to a different location on your computer and checking that all notebooks can run properly from top to bottom.
+#### MLR with Polynomial Features
 
-3) Bear in mind that the value you provide may come from data ingestion, data cleaning, EDA, and/ or a dashboard, etc. While a model may not be immediately apparent, be creative. *Without us telling you exactly what model to build, how could you build a model to increase performance or generate better insights when answering the problem you are facing?*
+Our linear regression model with Polynomial features and Lasso features performed both well with an R2 score of 0.9999. We also got 0.98 after adding PCA. We also discovered that food supply had the highest coefficient score after regularizing using Lasso.
 
-**Questions**: Questions should be sent to your local instructor. **Questions should be specific, brief, and formatted.**
-> This is a good practice to develop! When contacting a boss or a client, you should make your question as easy as possible to answer. Consider the following two examples:
+![](./visuals/lasso_coefficients.png)
 
-> Example 1: "Hey, I have a question. I'm writing a blog post about TensorFlow but got stuck. This part was confusing: https://www.tensorflow.org/api_docs/python/tf/tanh Can you help?"
+#### MLR using Neural Networks
 
-> Example 2: "The TensorFlow tanh documentation says 'Computes hyperbolic tangent of x element-wise.' What does hyperbolic tangent mean? The link to see more is: https://www.tensorflow.org/api_docs/python/tf/tanh"
+After building the model with polynomial features, we wanted to see if a neural network could match the R2 score from the previous model. We therefore used the same polynomial features from the last model, then built a Sequential NN model. We also used GridSearch to find the best parameters for the sequential model, eventually ending up two hidden layers that contained 128 neurons each, along with two dropout phases with a dropout percentage of 25%. This model produced an R2 score of .95, worse off than the non neural net regressor. We then checked the models to see where the predictions are off:
 
-> The first example spends about 20 words before mentioning what is going on. The question "Can you help?" is unspecific. The boss/client is required to go to a link in order to get any information about the problem.
+![](./visuals/nnr_preds_vs_actual.png)
 
-> The second example quickly calls out 'Tensorflow tanh documentation,' the explicit quote that is confusing, the explicit question being asked, and a link for additional context. Both examples attempt to get the boss/client/whomever to explain hyperbolic tangent, but imagine how much more quickly someone could answer the second query than the first.
+We also wanted to visualize how the model performed on the training data vs. the test data:
 
-> A helpful way to consider this: When you ask a question, you are basically asking for a favor. You're asking a person to give their time, their brainpower, and their knowledge to you. Every time you ask them to hunt around for more (i.e. they _have_ to travel to a link to get context or they struggle to understand the question you're asking), you're asking a bigger and bigger favor from them.
+![](./visuals/loss_and_mse.png)
 
----
+We decided that since the neural network could not out perform the other model, it was time to move onto the classifiers.
 
-### Teams
+### Multi-Classification
 
-Your local instructor will divide your class into teams. Chat with them to find out!
+As we move from Regression towards classification, we have two schools of thought when it comes to model selection. We will first work on 3 supervised models (KNN, Logistic Regression, Random Forest), compare those findings in a confusion matrix and classification report, and then create a model stack with all three (Second level will be the model with the greatest accuracy). Once we have that finished, we will then investigate whether a Neural Network Classifier can produce a better model.
 
----
+As we compare accuracy, keep in mind that our baseline will be the region representing the most total countries (Sub-Saharan Africa). This region represents roughly 25% of all countries in this data set.
 
-### Presentations
+**Disclaimer**: Due to Regions North America and Australia/New Zealand only having two countries in each, the precision/recall/f1/accuracy metrics are slightly skewed since there is not enough data to group into separate buckets for train/test splitting. Regions with higher country count provide a greater account into how well model performs overall.
 
-Each group will present their findings.
+Let’s start with KNN
 
-Your presentation must include:
-- A summary of the problem you tackled.
-- A walkthrough of how you set out to solve the problem.
-- A demonstration of your solution. (i.e. You may demonstrate an app you developed, an example of how a model may be used, etc.)
-- A summary of any models you fit and, if applicable, their performance.
-- A brief discussion of limitations to your process. (i.e. data collection issues, missing values)
-- A brief discussion of next steps.
+#### KNN Model
 
-Presentation requirements:
-- *Consider the audience!*
-- *As with presentations in the "real world," there is no required time limit.* Your presentation should be long enough to cover all relevant aspects of the problem, but not so long that it obscures the takeaways of the presentation. (Your group should likely aim for somewhere between 15 and 20 minutes, but it is possible that you may need a different amount of time for your presentation.)
-- Your presentation must include slides. (Google Slides, PowerPoint, Keynote, etc.)
-- Use visuals that are appropriately scaled and interpretable.
-- Make sure you provide clear conclusions/recommendations that follow logically from your analyses and narrative and answer your data science problem.
+![](./visuals/KNNConfMatr.png)     ![](./visuals/knn%20classification%20report.PNG)
 
----
 
-### Consulting Project Feedback + Evaluation
+Our KNN model did not perform that great. We achieved a total accuracy score of ~71%, and it was not able to correctly predict any country correct from North America or Australia/New Zealand. The model had a hard time disassociating between Middle East/Northern Africa and Central/Eastern Europe. The model also had trouble with Central and Eastern Europe and Latin America and Caribbean. KNN produced better than our baseline accuracy (25%), but still has more room to improve upon to become competitive.
 
-Data science is a field in which we apply data to solve real-world problems. Therefore, projects and presentations are means by which we can assess your ability to solve real-world problems in a data-driven manner.
+As we move to our next model lets look at Logistic Regression
 
-When evaluating projects, there are four areas on which your instructors focus.
-1. **Project Requirements: Did you meet all project requirements?** In answering this question, your instructors want to assess how well you met the project requirements as established. These will generally be laid out in the project readme.
+#### Logistic Regression:
 
-2. **Audience: Is your presentation appropriate for the stakeholder?** In answering this question, your instructors want to assess how well you present your results to stakeholders. For example:
-  - Did you frame the problem appropriately for the audience?
-  - Did you use the appropriate level of technical language for your audience?
-  - Did you effectively use your time, or did you encounter an issue such as going significantly beyond or under the allotted time or rushing to conclude the presentation in the allotted time?
-  - Did you present effectively, or were there things that detract from the overall presentation such as not speaking loudly enough for the audience or repeating oneself?
+![](./visuals/LogRegl1ConfMatr.png)      ![](./visuals/logreg%20classification%20report.PNG)
 
-3. **Methods: Are your methods appropriate for solving the problem?** In answering this question, your instructors want to assess how well you have applied data science methodology to the problem at hand. For example:
-  - Did you make well-reasoned modeling choices, or is there clear evidence that the model is inadequate or improper?
-  - Are you able to clearly defend your methodological decisions and results?
-  - Did you generalize your results properly, or were your conclusions/inferences improper or fallacious?
+Our Logistic Regression model provided a better picture into our data with a better accuracy score of ~75%. Most of the larger errors were grouped towards Central and Eastern Europe countries being misclassified as Latin America and Caribbean/Western Europe/Middle East and Northern Africa. The only other interesting error was that 3 countries in Sub-Saharan Africa were all classified as Southern Asia.
 
-4. **Value: Have you provided value to the stakeholder through clear, data-driven recommendations?** In answering this question, your instructors want to assess the value you provide to the stakeholder as a data scientist. For example:
-  - Did you answer the problem posed to you?
-  - Did you make your recommendations clear, or were the recommendations unclear?
-  - Were your recommendations data-driven and based on the results of your work?
+Our final model in this set of three will be a Random Forest
 
-You will earn a score for each of the four areas mentioned above.
-1. Project Requirements: You may earn a score of 0 or 1. You will earn a score of 1 if all project requirements are met. Otherwise, you will earn a score of 0.
-2. Audience: You may earn a score between 0 and 3. A score of 0 indicates that your presentation is inappropriate for the stakeholder. A score of 1 indicates that at least part of your presentation should be non-trivially reworked to be more appropriate for the stakeholder. A score of 2 indicates that there are few to no areas of your presentation that should be reworked. A score of 3 indicates that your presentation is consistently appropriate for the stakeholder and serves as a model for future presentations.
-3. Methods: You may earn a score between 0 and 3. A score of 0 indicates that your methods are inappropriate. A score of 1 indicates that your methods are somewhat inappropriate, that justification for methodological decisions is lacking, and/or that your conclusions do not follow from the methods. A score of 2 indicates that your methods are appropriate, justification is sufficient/strong, and your conclusions follow well from the methods. A score of 3 indicates that your methods are excellent, strongly defended, and serves model for future presentations.
-4. Value: You may earn a score between 0 and 3. A score of 0 indicates that you provide little to no value to the stakeholder. A score of 1 indicates that the value you provide to the stakeholder is substantially less than expected by not answering the problem, not providing clear recommendations to the stakeholder, and/or providing recommendations that were not data-driven. A score of 2 indicates that the value you provide to the stakeholder is on par with the expectation of providing clear, data-driven recommendations that directly answer the problem posed. A score of 3 indicates that the value you provide to the stakeholder is beyond what is expected and serves as a model for future presentations.
+#### Random Forest:
 
-Your final grade will be calculated as follows:
-- If any project requirement is not met, the final grade is 'Fail' with a score of 0.
-- If all project requirements are met, then the final grade is 'Pass' with a score calculated by summing the above scores. Therefore, if all project requirements are met, the final score will be between a 1 and 10.
+![](./visuals/RFConfMatr.png)      ![](./visuals/rf%20classification%20report.PNG)
+
+Our Random Forests produced our best model yet with an accuracy score of ~92%. Most errors are gone now, and while some do remain, they are concentrated towards the same errors as the Log Reg model above with Central and Eastern Europe countries being misclassified. Something to take note of here is that 3 of those 10 regions had 100% precision and recall scores by classifying them all correctly (Southern Asia, Eastern Asia, and Australia/New Zealand).
+
+We also wanted to create a model stack of all 3 models as our initial level 1, with a Random Forest as our second level since that produced the highest accuracy score of our 3 classification models so far.
+
+#### Model Stack
+
+![](./visuals/StackConfMatr.png)       ![](./visuals/stack%20classification%20report.PNG)
+
+Our model stack did not produce better results that our random forest and resulted in an accuracy score of ~90%. There are some minor differences and compared to our Random Forest from above, only produced 2 perfect regions (Eastern Asia and Australia/New Zealand).
+
+#### NN Multi-Classifier
+
+![](./visuals/nn%20class%20confmatr.PNG)
+
+Our neural network multi-classifier was built with two hidden layers, each with 128 neurons, and two dropout layers, each with a 25% dropout rate. This model had an accuracy score of 85%, well under the best random forest model. The confusion matrix showed that the model did not perfectly predicted any of the regions. 
+
+
+## Conclusion
+
+### Regression Models
+
+Since all of the features were known and that that there were no unknown variables that would affect happiness, our polynomial model produced the highest R2 score. When reducing features with a Lasso, we were able to reduce down from 90 to 27 features. We also discovered that the most important coefficient was the food calorie supply, which was not information supplied by the UN. It was also interesting that the neural network performed worse than the Linear Regression, even though the Neural Network was also given polynomial features. We believe that this is likely due to the fact that this is a small data set, and neural networks were designed to handle larger data sets. If we were to add more years, and therefore more data, we believe it is likely that the Neural Network would match the effectiveness of the simple linear regression model.
+
+### Classification Models
+
+The worst model was the KNN model with 71%, followed by the Logistic Regression model with an accuracy of 75%. The best model was the Random Forest model with an accuracy of 92%, which was even better than when we stacked all of the models. The random forest was able to perfectly predict 3 of the regions with 100% precision and recall scores. All models struggled to predict Central and Eastern Europe countries. The Neural Network again was out performed by the simpler models, and again we believe this is the case because we had a small data set. It should noted that all models out performed the baseline accuracy, which was 25%. 
+
+
+
