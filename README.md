@@ -7,7 +7,8 @@ We have been hired by the UN to build a model that can predict the happiness of 
 ## Data Gathering
 
 Data was collected from the UN Happiness Report for the years 2015-2017 [Happiness Report](https://www.kaggle.com/unsdsn/world-happiness)
-Data was also gathered from [Our World in Data](https://ourworldindata.org/)
+
+Data was also sourced from [Our World in Data](https://ourworldindata.org/)
 
 ## Data Dictionary
 
