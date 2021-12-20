@@ -39,7 +39,7 @@ Data was also gathered from [Our World in Data](https://ourworldindata.org/)
 
 The first thing that we explored was the relationship between happiness, food, and freedom. Using Tableau, we created a visualization to help show how these features relate to each other. [Tableau Visualization](https://public.tableau.com/app/profile/spencer.buckner/viz/HappinessData_16396021350410/Dash1) 
 
-One of the first things we looked at was a heatmap of all the variables to gain an understanding of what produced high correlations to happiness score:
+As we explored further, we created at a heatmap of all the variables to gain an understanding of what produced high correlations to happiness score:
 
 ![](./visuals/heatmap_all.png)
 
@@ -47,9 +47,9 @@ We then wanted to creat the following table to show the average happiness scores
 
 ![](./visuals/avg_happiness_by_region.png)
 
-The highest scores all seemed to be centered around North America, Austrailia/New Zealand and Western Europe
+The highest scores all seemed to be centered around North America, Austrailia/New Zealand and Western Europe while the lowest scores were centered around Africa and Asia.
 
-Below is the findings for the top 10 average happiness scores: 
+Below is our findings for the top 10 scores: 
 
 ![](./visuals/top_10_by_country.png)
 
