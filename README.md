@@ -111,9 +111,9 @@ Our model produced an R2 score of ~ 0.72. Not exactly amazing, but a good starti
 
 #### MLR with Polynomial Features
 
-Our second mlr model with Polynomial features and Lasso regularization performed well with an R2 score of 0.9999. Our PCA achieved 0.98. Our initial though was that we had accidentally leaked the 'answers' to the model and that was why it had achieved such a high score. After careful discussion, we came to the conclusion that since all features affecting these happiness scores are provided by the UN and there are no unknown factors affecting these scores, the models were able to pick up on this and build accurate predictions based on known features. Interestingly enough though, when we ran our Lasso model through, one of our outside data sources (food supply calories) became our highest coefficient in prediciting happiness scores. 
+Our second mlr model with Polynomial features and Lasso regularization performed well with an R2 score of 0.9999. Our PCA achieved 0.98. Our initial though was that we had accidentally leaked the 'answers' to the model and that was why it had achieved such a high score. After careful discussion, we came to the conclusion that since all features affecting these happiness scores are provided by the UN and there are no unknown factors affecting these scores, the models were able to pick up on this and build accurate predictions based on known features. Interestingly enough though, when we ran our Lasso model through, one of our outside data sources (food supply calories) became our highest coefficient in prediciting happiness scores, more than doubling the next closest coefficient. 
 
-Below if the findings based on our Lasso:
+Below are the model coefficients for our Lasso:
 
 ![](./visuals/lasso_coefficients.png)
 
