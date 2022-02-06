@@ -38,7 +38,7 @@ Data was also sourced from [Our World in Data](https://ourworldindata.org/)
 
 ## EDA
 
-The first thing that we explored was the relationship between happiness, food, and freedom. Using Tableau, we created a visualization to help show how these features relate to each other. [Tableau Visualization](https://public.tableau.com/app/profile/spencer.buckner/viz/HappinessData_16396021350410/Dash1) 
+The first thing that we explored was the relationship between happiness, food, and freedom. Using Tableau, we created a visualization to help show how these features relate to each other. [Tableau Visualization](https://public.tableau.com/app/profile/spencer.buckner/viz/HappinessData_16396021350410/HappinessScoresDashboard) 
 
 As we explored further, we created at a heatmap of all the variables to gain an understanding of what produced high correlations to happiness score:
 
